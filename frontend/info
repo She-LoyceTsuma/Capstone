@@ -1,0 +1,6 @@
+Description of webapp:
+1. Contains landing page.
+2. Contains only the login/admin page.
+3. Showcases the precision, recall and accuracy score of the model.
+4. Showcases the fraud cases enacted by the model created.
+5. Displays visualizations of the models and predictive analysis.
