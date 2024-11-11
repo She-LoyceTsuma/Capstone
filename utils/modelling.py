@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 
-def get_preprocessor(df, target_col):
+def get_preprocessor(df, target_col=None):
     """Function to retrun the preprocessor
     Parameters:
         df(pd.DataFrame): the data
@@ -17,20 +17,23 @@ def get_preprocessor(df, target_col):
     # and numeric columns for scaling
     numeric_features = df.select_dtypes(exclude='object').columns.tolist()
     categorical_features = df.select_dtypes(include='object').columns.tolist()
+    
+    # apply lowercase to categorical features
+    df[categorical_features] = df[categorical_features].apply(lambda x: x.str.lower())
 
-    # Remove target feature from categorica list
-    if target_col not in categorical_features:
-        print('Target column not found')
-        return
-    categorical_features.remove(target_col)
+    # Remove target feature from categorical list
+    if target_col:
+        categorical_features.remove(target_col)
     # Preprocessing the features
     preprocessor = ColumnTransformer(
         transformers=[
-            ('cat_encoder', OneHotEncoder(drop='first', sparse_output=False),
+            ('cat_encoder', OneHotEncoder(drop='first', sparse_output=False,
+                                          handle_unknown='ignore'),
              categorical_features
              ),
             ('scaler', StandardScaler(), numeric_features)
         ]
+        
     )
     return preprocessor
 
@@ -86,6 +89,12 @@ def prepare_model_data(data_dict):
     
     data_dict['incident_hour_of_the_day'] = data_dict['incident_hour_of_day']
     del data_dict['incident_hour_of_day']
+    
+    data_dict['capital-gains'] = data_dict['capital_gain']
+    del data_dict['capital_gain']
+    
+    data_dict['capital-loss'] = data_dict['capital_loss']
+    del data_dict['capital_loss']
     
     data_dict = {k: [v] for k, v in data_dict.items()}
     

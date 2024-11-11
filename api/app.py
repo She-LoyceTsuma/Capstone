@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
+import joblib
 from utils.modelling import prepare_model_data
 
 
@@ -12,9 +13,20 @@ CORS(app)
 def predict():
     data = request.get_json()
     data = prepare_model_data(data)
-    print(data)
     
-    return jsonify({'status': 'success'})
+    print(data.info())
+    
+    preprocessor = joblib.load('api\preprocessor.pkl')
+    
+    X_preprocesseed = preprocessor.transform(data)
+    
+    model = joblib.load('api\model.pkl')
+    
+    prediction = model.predict(X_preprocesseed)
+    
+    is_fraud = prediction.tolist()[0]
+    
+    return jsonify({'is_fraud': is_fraud}), 200
 
 
 if __name__ == '__main__':
