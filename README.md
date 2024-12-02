@@ -1,15 +1,15 @@
 # Fraud Detection System
-This is a fraud detection system that uses predicive modeling to determine whether an insuraance clain is fradulent.
+This fraud detection system uses predictive modeling to determine whether an insurance claim is fraudulent.
 
-## 1.Business Understanding
+## 1. Business Understanding
 
 ## Key Business Questions: 
 ##### How can fraud be identified more efficiently?
 The system will remove human bias that can alter the decision-making process.
 ##### What are the cost savings and risk reductions that the system provides?
 Reduces the cost and time taken to make decisions, data-driven decisions. 
-##### How can the system improve stakeholder’s trust and the fairness of premium pricing?
-Users can be informed if their accounts have been marked as fraudulent, and they don’t have to remove bribes to get their insurance claims met. 
+##### How can the system improve stakeholder trust and premium pricing fairness?
+Users can be informed if their accounts are marked as fraudulent, and they don’t have to remove bribes to meet their insurance claims. 
 ##### What technologies can be leveraged to enhance fraud detection?
  Consider implementing machine learning algorithms, real-time analytics, and behavioral biometrics. These technologies can analyze patterns and anomalies in data, improving detection rates without relying on human judgment.
 ##### What metrics will be used to measure the system's effectiveness in fraud detection?*
